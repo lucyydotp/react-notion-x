@@ -225,9 +225,10 @@ export function convertBlock({
       if (pageMap) {
         const page = pageMap[block.id] as types.Page
         if (page) {
-          if (page.properties.title) {
+          const titleProp = page.properties.title ?? page.properties.Page
+          if (titleProp) {
             compatBlock.properties.title = convertRichText(
-              (page.properties.title as any).title
+              (titleProp as any).title
             )
           }
 
@@ -261,6 +262,7 @@ export function convertBlock({
                 break
             }
           }
+          console.log(page.icon)
 
           if (page.parent) {
             switch (page.parent.type) {
